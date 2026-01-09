@@ -1,3 +1,11 @@
+<?php
+
+require_once __DIR__ . '/../products/ProductController.php';
+
+ $app = new productController();
+    $app-> handleRequest();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
