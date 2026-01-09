@@ -8,13 +8,19 @@ class ProductModel{
     }
 
 
-    public function getAll(){
+   public function getAll($keyword = ""){
         $sql = "SELECT * FROM san_pham";
+
         if(!empty($keyword)){
-            $sql .= "WHERE ten_sp LIKE  :kw";
+            // SỬA 2: Thêm dấu cách trước chữ WHERE
+            $sql .= " WHERE ten_sp LIKE :kw";
         }
-        $sql .= "ORDER BY id DESC";
+
+        // SỬA 3: Thêm dấu cách trước chữ ORDER BY
+        $sql .= " ORDER BY id DESC";
+
         $stmt = $this->conn->prepare($sql);
+
         if(!empty($keyword)){
             $stmt->bindValue(':kw','%' .$keyword . '%');
         }

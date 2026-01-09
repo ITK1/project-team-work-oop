@@ -25,8 +25,46 @@
     </div>
 
     <div>
+        <h3>nhập hàng mới</h3>
 
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" name="ten_sp" planceholder="ten san pham" required>
+            <input type="number" name="gia" planceholder="gia san pham" required>
+            <input type="file" name="hinh_anh">
+            <button type="submit" name="btn_add">them</button>
+        </form>
     </div>
+
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>hinh</th>
+                <th>ten sp</th>
+                <th>gia</th>
+                <th>hanh dong</th>
+            </tr>
+        </thead>
+    </table>
+    <tbody>
+        <?php foreach($products as $p):?>
+        <tr>
+            <td>
+                <?php if($p['hinh_anh']): ?>
+                <img src="<?= $p['hinh_anh']?>">
+                <?php endif;?>
+            </td>
+
+            <td><?= htmlspecialchars($p['ten_sp']);?></td>
+            <td><?= number_format($p['gia'])?>đ</td>
+            <td>
+                <a href="index.php?action=delete$id<?=$p['id']?>" onclick="return confirm('ban co muon xoa khong')">
+                    xóa</a>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
 
 </body>
 
