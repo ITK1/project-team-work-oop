@@ -1,6 +1,6 @@
 <?php
 session_start(); // Khởi tạo session ngay đầu file
-require_once __DIR__ .'/../core/Database.php'; // Chỉnh lại đường dẫn nếu cần thiết (ví dụ: ../core/Database.php)
+
 require_once __DIR__ . '/../models/ProductModel.php'; // Chỉnh lại đường dẫn models
 
 class ProductController {
