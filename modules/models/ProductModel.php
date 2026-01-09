@@ -1,48 +1,31 @@
 <?php
 class ProductModel{
-
     private $conn;
-    public function __construct($db){
 
+    public function __construct($db){
         $this->conn = $db;
     }
 
-
-   public function getAll($keyword = ""){
-        $sql = "SELECT * FROM san_pham";
-
-        if(!empty($keyword)){
-            // SỬA 2: Thêm dấu cách trước chữ WHERE
-            $sql .= " WHERE ten_sp LIKE :kw";
-        }
-
-        // SỬA 3: Thêm dấu cách trước chữ ORDER BY
-        $sql .= " ORDER BY id DESC";
-
-        $stmt = $this->conn->prepare($sql);
-
-        if(!empty($keyword)){
-            $stmt->bindValue(':kw','%' .$keyword . '%');
-        }
-
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // lay toan bo danh sach
+    public function getAll(){
+        $sql = $this->conn->prepare("SELECT * FROM san_pham ORDER BY id DESC");
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);// tra ve mang
     }
 
-    public function add($ten,$gia,$hinh){
-        $sql = "INSERT INTO san_pham(ten_sp, gia, hinh_anh) VALUES (:ten,:gia,:hinh)";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([':ten'=>$ten, ':gia'=> $gia, ':hinh' =>$hinh]);
+
+    public function add($ten, $gia, $hinh){
+        $sql = " INSERT INTO san_pham (ten_sp, gia,hinh_anh) VALUES(:ten ,:gia, :hinh)";
+        $sql = $this->conn->prepare($sql);
+        return $sql->execute([':ten' =>$ten , ':gia' => $gia , ':hinh'=> $hinh]);
     }
+
 
     public function delete($id){
-        $sql = $this->conn->prepare("DELETE FROM san_pham WHERE id =:id");
-        return $sql->execute([':id'=>$id]);
+        $sql= $this->conn->prepare("DELETE FROM san_pham WHERE id=:id");
+        $sql->execute([':id'=>$id]);
     }
 
     
-    
 }
-
-
 ?>
