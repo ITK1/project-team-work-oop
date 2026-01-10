@@ -56,7 +56,7 @@ require_once __DIR__ . '/../products/ProductController.php';
         </thead>
     </table>
     <tbody>
-        <?php foreach($products as $p):?>
+        <?php foreach($app as $p):?>
         <tr>
             <td>
                 <?php if($p['hinh_anh']): ?>
